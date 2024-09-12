@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:streamingapp/shared/popular_channel_item.dart';
 import 'package:streamingapp/shared/rounded_label.dart';
 
@@ -13,6 +15,31 @@ class ExploreAll extends StatefulWidget {
 class _ExploreAllState extends State<ExploreAll> {
   int currentPage = 0;
   int totalPages = 3;
+  late Future<List<String>> discordUpdates;
+
+  @override
+  void initState() {
+    super.initState();
+    discordUpdates = fetchDiscordUpdates();
+  }
+
+  Future<List<String>> fetchDiscordUpdates() async {
+    print("Fetching Discord updates..."); // Debug print
+    final response = await http.get(Uri.parse(
+        'https://swedenrpupdates-7ef4b9385555.herokuapp.com/api/updates'));
+    print("API Response status code: ${response.statusCode}"); // Debug print
+    print("API Response body: ${response.body}"); // Debug print
+    if (response.statusCode == 200) {
+      List<dynamic> jsonResponse = jsonDecode(response.body);
+      return jsonResponse.map((item) {
+        String author = item['author'] ?? 'Unknown';
+        String content = item['content'] ?? '';
+        return "$author : $content";
+      }).toList();
+    } else {
+      throw Exception('Failed to load updates');
+    }
+  }
 
   List<Widget> buildPageIndicator() {
     List<Widget> list = [];
@@ -52,9 +79,9 @@ class _ExploreAllState extends State<ExploreAll> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Sweden Roleplay",
+                          "SwedenRP",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Color(0xFFCB6CE6),
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
                             height: 1,
@@ -85,8 +112,8 @@ class _ExploreAllState extends State<ExploreAll> {
                         buildPage(
                             "assets/images/user_1.jpg",
                             "assets/images/explore_1.jpg",
-                            "Live Fortnite Chill",
-                            "ForeverYoungGaming"),
+                            "Sweden Roleplay",
+                            "1.Cuz"),
                         buildPage(
                             "assets/images/user_2.jpg",
                             "assets/images/explore_2.jpg",
@@ -107,13 +134,59 @@ class _ExploreAllState extends State<ExploreAll> {
                       children: buildPageIndicator(),
                     ),
                   ),
-                  // Add your new middle content here
-                  const SizedBox(height: 20),
-                  const Text(
-                    "Your new middle content goes here",
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  // Discord updates section
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      "Server Updates",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 200, // Adjust this height as needed
+                    child: FutureBuilder<List<String>>(
+                      future: discordUpdates,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        } else if (snapshot.hasError) {
+                          print("Error: ${snapshot.error}"); // Debug print
+                          return Center(
+                              child: Text('Error: ${snapshot.error}',
+                                  style: TextStyle(color: Colors.white)));
+                        } else if (snapshot.hasData &&
+                            snapshot.data!.isNotEmpty) {
+                          print(
+                              "Number of updates: ${snapshot.data!.length}"); // Debug print
+                          return ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage('assets/images/botfetch.jpg'),
+                                ),
+                                title: Text(
+                                  snapshot.data![index],
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              );
+                            },
+                          );
+                        } else {
+                          print("No data available"); // Debug print
+                          return Center(
+                              child: Text('No updates available',
+                                  style: TextStyle(color: Colors.white)));
+                        }
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -139,7 +212,7 @@ class _ExploreAllState extends State<ExploreAll> {
                         widget.onPress();
                       },
                       child: Text(
-                        "Se alla",
+                        "Open all",
                         style: TextStyle(
                           color: Colors.grey[600],
                           fontSize: 18,
@@ -219,8 +292,8 @@ class _ExploreAllState extends State<ExploreAll> {
         ),
         alignment: Alignment.bottomCenter,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const Expanded(child: SizedBox()),
             Padding(
               padding: const EdgeInsets.all(16),
               child: Row(

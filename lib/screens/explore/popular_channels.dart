@@ -47,7 +47,7 @@ class PopularChannels extends StatelessWidget {
                 const Text(
                   "Vår Streamers",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFFCB6CE6),
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     height: 1,
@@ -57,7 +57,7 @@ class PopularChannels extends StatelessWidget {
                   height: 12,
                 ),
                 Text(
-                  "Language: English",
+                  "Language: Swedish/English",
                   style: TextStyle(
                     color: Colors.grey[800],
                     fontSize: 16,
