@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:streamingapp/shared/category_item.dart';
-import 'package:streamingapp/shared/custom_filled_field.dart';
 import 'package:streamingapp/shared/popular_channel_item.dart';
 import 'package:streamingapp/shared/rounded_label.dart';
 
@@ -43,30 +41,6 @@ class _ExploreAllState extends State<ExploreAll> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 32,
-                  child: Image.asset(
-                    "assets/icons/joystick.png",
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                const Expanded(
-                  child: CustomFilledField(
-                    label: "Search games, channels...",
-                    iconData: Icons.tune_outlined,
-                  ),
-                ),
-              ],
-            ),
-          ),
           Expanded(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -78,7 +52,7 @@ class _ExploreAllState extends State<ExploreAll> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Explore",
+                          "Sweden Roleplay",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 32,
@@ -133,127 +107,89 @@ class _ExploreAllState extends State<ExploreAll> {
                       children: buildPageIndicator(),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Popular channels",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            widget.onPress();
-                          },
-                          child: Text(
-                            "Open all",
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  // Add your new middle content here
+                  const SizedBox(height: 20),
+                  const Text(
+                    "Your new middle content goes here",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(
-                      bottom: 16,
-                      left: 16,
-                      right: 16,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: PopularChannelItem(
-                            imageUrl: "assets/images/user_1.jpg",
-                            name: "Sapphiron",
-                            variation: true,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        Expanded(
-                          child: PopularChannelItem(
-                            imageUrl: "assets/images/user_2.jpg",
-                            name: "Oodin",
-                            variation: true,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        Expanded(
-                          child: PopularChannelItem(
-                            imageUrl: "assets/images/user_3.jpg",
-                            name: "MeTaleiZer",
-                            variation: true,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Top categories",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          "Open all",
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 16, right: 16, left: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CategoryItem(
-                          imageUrl: "assets/images/category_1.jpg",
-                          name: "FPS",
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        CategoryItem(
-                          imageUrl: "assets/images/category_2.jpg",
-                          name: "RPG",
-                        ),
-                        SizedBox(
-                          width: 16,
-                        ),
-                        CategoryItem(
-                          imageUrl: "assets/images/category_3.jpg",
-                          name: "SPORTS",
-                        ),
-                      ],
-                    ),
-                  ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
+          ),
+          // Popular channels section moved to the bottom
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Vår Streamers",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        widget.onPress();
+                      },
+                      child: Text(
+                        "Se alla",
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(
+                  bottom: 16,
+                  left: 16,
+                  right: 16,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: PopularChannelItem(
+                        imageUrl: "assets/images/user_1.jpg",
+                        name: "1.Cuz",
+                        variation: true,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: PopularChannelItem(
+                        imageUrl: "assets/images/user_2.jpg",
+                        name: "GhostAlby",
+                        variation: true,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: PopularChannelItem(
+                        imageUrl: "assets/images/user_3.jpg",
+                        name: "Huncho",
+                        variation: true,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -284,9 +220,7 @@ class _ExploreAllState extends State<ExploreAll> {
         alignment: Alignment.bottomCenter,
         child: Column(
           children: [
-            Expanded(
-              child: Container(),
-            ),
+            const Expanded(child: SizedBox()),
             Padding(
               padding: const EdgeInsets.all(16),
               child: Row(
@@ -295,37 +229,36 @@ class _ExploreAllState extends State<ExploreAll> {
                     height: 45,
                     width: 45,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(userImage),
-                          fit: BoxFit.cover,
-                        ),
-                        shape: BoxShape.circle),
+                      image: DecorationImage(
+                        image: AssetImage(userImage),
+                        fit: BoxFit.cover,
+                      ),
+                      shape: BoxShape.circle,
+                    ),
                   ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        subTitle,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
+                        const SizedBox(height: 4),
+                        Text(
+                          subTitle,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),

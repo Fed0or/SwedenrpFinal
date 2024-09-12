@@ -45,7 +45,7 @@ class PopularChannels extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Popular channels",
+                  "Vår Streamers",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -77,18 +77,18 @@ class PopularChannels extends StatelessWidget {
                 crossAxisSpacing: 15,
                 children: const [
                   PopularChannelItem(
-                    imageUrl: "assets/images/avatar_1.jpg",
-                    name: "Sapphiron",
+                    imageUrl: "assets/images/user_1.jpg",
+                    name: "1.Cuz",
                     variation: false,
                   ),
                   PopularChannelItem(
-                    imageUrl: "assets/images/avatar_2.jpg",
-                    name: "Oodin",
+                    imageUrl: "assets/images/user_2.jpg",
+                    name: "GhostAlby",
                     variation: false,
                   ),
                   PopularChannelItem(
-                    imageUrl: "assets/images/avatar_3.jpg",
-                    name: "MeTaleiZer",
+                    imageUrl: "assets/images/user_3.jpg",
+                    name: "Huncho",
                     variation: false,
                   ),
                   PopularChannelItem(
