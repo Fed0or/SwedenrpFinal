@@ -1,37 +1,41 @@
-class Game {
-  String title;
-  String subTitle;
+// lib/utils/data.dart
+
+class Streamer {
+  String name;
+  String username;
   String description;
   String imageUrl;
-  String users;
+  String followers;
   String viewers;
 
-  Game(this.title, this.subTitle, this.description, this.imageUrl, this.users,
-      this.viewers);
+  Streamer(this.name, this.username, this.description, this.imageUrl, this.followers, this.viewers);
 }
 
-List<Game> getGames() {
-  return <Game>[
-    Game(
-        "Counter-Strike: Global Offensive",
-        "ESL_CSGO",
-        "RERUN: Astralis VS FaZe Clan [Dust2] Map 1 - ESL One: Road to Rio - Upper Bracket Final - EU",
-        "assets/images/csgo.jpg",
-        "16890",
-        "101.646"),
-    Game(
-        "Call Of Duty: Warzone",
-        "COD_WARZONE",
-        "RERUN: Astralis VS FaZe Clan [Vardansk] Map 1 - ESL One: Road to Rio - Upper Bracket Final - EU",
-        "assets/images/cod.jpg",
-        "95433",
-        "186.255"),
-    Game(
-        "FIFA 20",
-        "EA_SPORTS",
-        "Qualifications rounds and semi finals - Europe and Asia",
-        "assets/images/fifa.jpg",
-        "34521",
-        "68.255"),
+List<Streamer> getStreamers() {
+  return <Streamer>[
+    Streamer(
+      "1.cuz",
+      "1.cuz",
+      "Pro Fortnite player streaming daily. Come join the fun!",
+      "assets/images/user_1.jpg",
+      "16890",
+      "101.646"
+    ),
+    Streamer(
+      "GhostAlby",
+      "GhostAlby",
+      "Variety streamer playing the latest and greatest games!",
+      "assets/images/user_2.jpg",
+      "95433",
+      "186.255"
+    ),
+    Streamer(
+      "Huncho",
+      "Huncho",
+      "FIFA pro player. Road to world championship starts here!",
+      "assets/images/user_3.jpg",
+      "34521",
+      "68.255"
+    ),
   ];
 }

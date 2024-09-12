@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:streamingapp/utils/constants.dart';
 import 'package:streamingapp/utils/data.dart';
-import 'package:streamingapp/screens/games/game_item.dart';
+import 'package:streamingapp/screens/games/streamer_item.dart';
 
-class GamesAll extends StatelessWidget {
+class StreamersAll extends StatelessWidget {
   final Function onPress;
 
-  const GamesAll({super.key, required this.onPress});
+  const StreamersAll({super.key, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class GamesAll extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
-                            "All Games",
+                            "All Streamers",
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -72,9 +72,9 @@ class GamesAll extends StatelessWidget {
               child: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
-                  children: getGames()
-                      .map((item) => GameItem(
-                            game: item,
+                  children: getStreamers()
+                      .map((item) => StreamerItem(
+                            streamer: item,
                             onPress: () {
                               onPress(item);
                             },

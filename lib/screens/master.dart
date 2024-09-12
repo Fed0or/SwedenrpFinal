@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:streamingapp/screens/explore/explore.dart';
-import 'package:streamingapp/screens/games/games.dart';
+import 'package:streamingapp/screens/games/streamers.dart';
 import 'package:streamingapp/screens/profile/profile.dart';
 import 'package:streamingapp/screens/search/search.dart';
 import 'package:streamingapp/utils/constants.dart';
@@ -30,7 +30,7 @@ class _MasterState extends State<Master> {
   Widget getBody() {
     return IndexedStack(
       index: page,
-      children: const [Explore(), Search(), Games(), Profile()],
+      children: const [Explore(), Search(), Streamers(), Profile()],
     );
   }
 

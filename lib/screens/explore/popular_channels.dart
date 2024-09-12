@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:streamingapp/shared/custom_filled_field.dart';
 import 'package:streamingapp/shared/popular_channel_item.dart';
+import 'package:streamingapp/utils/data.dart';
+import 'package:streamingapp/screens/games/streamer_detail.dart';
 
 class PopularChannels extends StatelessWidget {
   final Function onPress;
@@ -9,6 +11,8 @@ class PopularChannels extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Streamer> streamers = getStreamers();
+
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,98 +79,143 @@ class PopularChannels extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 crossAxisCount: 3,
                 crossAxisSpacing: 15,
-                children: const [
-                  PopularChannelItem(
-                    imageUrl: "assets/images/user_1.jpg",
-                    name: "1.Cuz",
-                    variation: false,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StreamerDetail(
+                            streamer: streamers.firstWhere((s) => s.name == "1.cuz"),
+                            onPress: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                    child: const PopularChannelItem(
+                      imageUrl: "assets/images/user_1.jpg",
+                      name: "1.Cuz",
+                      variation: false,
+                    ),
                   ),
-                  PopularChannelItem(
-                    imageUrl: "assets/images/user_2.jpg",
-                    name: "GhostAlby",
-                    variation: false,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StreamerDetail(
+                            streamer: streamers.firstWhere((s) => s.name == "GhostAlby"),
+                            onPress: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                    child: const PopularChannelItem(
+                      imageUrl: "assets/images/user_2.jpg",
+                      name: "GhostAlby",
+                      variation: false,
+                    ),
                   ),
-                  PopularChannelItem(
-                    imageUrl: "assets/images/user_3.jpg",
-                    name: "Huncho",
-                    variation: false,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StreamerDetail(
+                            streamer: streamers.firstWhere((s) => s.name == "Huncho"),
+                            onPress: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                    child: const PopularChannelItem(
+                      imageUrl: "assets/images/user_3.jpg",
+                      name: "Huncho",
+                      variation: false,
+                    ),
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_4.jpg",
                     name: "RFGust",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_5.jpg",
                     name: "xLinux",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_6.jpg",
                     name: "mgpotonaxx",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_7.jpg",
                     name: "mian",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_8.jpg",
                     name: "Aquiles20",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_9.jpg",
                     name: "timothy",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_10.jpg",
                     name: "lunaticoo",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_11.jpg",
                     name: "Tsukii",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_12.jpg",
                     name: "Searinox",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_13.jpg",
-                    name: "	xDeathWing",
+                    name: "xDeathWing",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_14.jpg",
                     name: "xJaina",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_15.jpg",
                     name: "Ka3l",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_16.jpg",
                     name: "Malygos",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_17.jpg",
                     name: "PLUT0N",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_18.jpg",
                     name: "jashirama",
                     variation: false,
                   ),
-                  PopularChannelItem(
+                  const PopularChannelItem(
                     imageUrl: "assets/images/avatar_19.jpg",
                     name: "ESL",
                     variation: false,

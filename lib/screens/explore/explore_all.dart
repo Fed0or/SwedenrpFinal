@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:streamingapp/shared/popular_channel_item.dart';
 import 'package:streamingapp/shared/rounded_label.dart';
+import 'package:streamingapp/utils/data.dart';
+import 'package:streamingapp/screens/games/streamer_detail.dart';
 
 class ExploreAll extends StatefulWidget {
   final Function onPress;
@@ -16,28 +18,35 @@ class _ExploreAllState extends State<ExploreAll> {
   int currentPage = 0;
   int totalPages = 3;
   late Future<List<String>> discordUpdates;
+  late List<Streamer> streamers;
 
   @override
   void initState() {
     super.initState();
     discordUpdates = fetchDiscordUpdates();
+    streamers = getStreamers();
   }
 
   Future<List<String>> fetchDiscordUpdates() async {
-    print("Fetching Discord updates..."); // Debug print
-    final response = await http.get(Uri.parse(
-        'https://swedenrpupdates-7ef4b9385555.herokuapp.com/api/updates'));
-    print("API Response status code: ${response.statusCode}"); // Debug print
-    print("API Response body: ${response.body}"); // Debug print
-    if (response.statusCode == 200) {
-      List<dynamic> jsonResponse = jsonDecode(response.body);
-      return jsonResponse.map((item) {
-        String author = item['author'] ?? 'Unknown';
-        String content = item['content'] ?? '';
-        return "$author : $content";
-      }).toList();
-    } else {
-      throw Exception('Failed to load updates');
+    try {
+      print("Fetching Discord updates..."); // Debug print
+      final response = await http.get(Uri.parse(
+          'https://swedenrpupdates-7ef4b9385555.herokuapp.com/api/updates'));
+      print("API Response status code: ${response.statusCode}"); // Debug print
+      print("API Response body: ${response.body}"); // Debug print
+      if (response.statusCode == 200) {
+        List<dynamic> jsonResponse = jsonDecode(response.body);
+        return jsonResponse.map((item) {
+          String author = item['author'] ?? 'Unknown';
+          String content = item['content'] ?? '';
+          return "$author : $content";
+        }).toList();
+      } else {
+        throw Exception('Failed to load updates');
+      }
+    } catch (e) {
+      print("Error fetching updates: $e");
+      return [];
     }
   }
 
@@ -223,8 +232,8 @@ class _ExploreAllState extends State<ExploreAll> {
                   ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(
+              Padding(
+                padding: const EdgeInsets.only(
                   bottom: 16,
                   left: 16,
                   right: 16,
@@ -233,30 +242,71 @@ class _ExploreAllState extends State<ExploreAll> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      child: PopularChannelItem(
-                        imageUrl: "assets/images/user_1.jpg",
-                        name: "1.Cuz",
-                        variation: true,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => StreamerDetail(
+                                streamer: streamers.firstWhere((s) => s.name == "1.cuz"),
+                                onPress: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                        child: PopularChannelItem(
+                          imageUrl: "assets/images/user_1.jpg",
+                          name: "1.Cuz",
+                          variation: true,
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      width: 16,
-                    ),
+                    SizedBox(width: 16),
                     Expanded(
-                      child: PopularChannelItem(
-                        imageUrl: "assets/images/user_2.jpg",
-                        name: "GhostAlby",
-                        variation: true,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => StreamerDetail(
+                                streamer: streamers.firstWhere((s) => s.name == "GhostAlby"),
+                                onPress: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                        child: PopularChannelItem(
+                          imageUrl: "assets/images/user_2.jpg",
+                          name: "GhostAlby",
+                          variation: true,
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      width: 16,
-                    ),
+                    SizedBox(width: 16),
                     Expanded(
-                      child: PopularChannelItem(
-                        imageUrl: "assets/images/user_3.jpg",
-                        name: "Huncho",
-                        variation: true,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => StreamerDetail(
+                                streamer: streamers.firstWhere((s) => s.name == "Huncho"),
+                                onPress: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                        child: PopularChannelItem(
+                          imageUrl: "assets/images/user_3.jpg",
+                          name: "Huncho",
+                          variation: true,
+                        ),
                       ),
                     ),
                   ],

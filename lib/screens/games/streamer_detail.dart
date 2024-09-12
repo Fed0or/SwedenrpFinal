@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:streamingapp/screens/search/game_item_result.dart';
 import 'package:streamingapp/shared/rounded_label.dart';
-import 'package:streamingapp/utils/data.dart';
 import 'package:streamingapp/utils/constants.dart';
 import 'package:streamingapp/shared/tag_pill.dart';
+import 'package:streamingapp/utils/data.dart';
 
-class GameDetail extends StatelessWidget {
-  final Game game;
+class StreamerDetail extends StatelessWidget {
+  final Streamer streamer;
   final Function onPress;
 
-  const GameDetail({super.key, required this.game, required this.onPress});
+  const StreamerDetail({super.key, required this.streamer, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +20,9 @@ class GameDetail extends StatelessWidget {
           Container(
             height: 300,
             margin: const EdgeInsets.only(bottom: 16),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/egames.jpg"),
+                image: AssetImage(streamer.imageUrl),
                 fit: BoxFit.cover,
               ),
             ),
@@ -66,7 +66,7 @@ class GameDetail extends StatelessWidget {
                                     width: 8,
                                   ),
                                   Text(
-                                    game.users,
+                                    streamer.followers,
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 14,
@@ -125,9 +125,9 @@ class GameDetail extends StatelessWidget {
                       Container(
                         height: 60,
                         width: 60,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage("assets/images/avatar_19.jpg"),
+                              image: AssetImage(streamer.imageUrl),
                               fit: BoxFit.cover),
                           shape: BoxShape.circle,
                         ),
@@ -140,14 +140,14 @@ class GameDetail extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              game.subTitle,
+                              streamer.username,
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              "${game.viewers} viewers",
+                              "${streamer.viewers} viewers",
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -171,7 +171,7 @@ class GameDetail extends StatelessWidget {
                     color: Colors.grey[800],
                   ),
                   Text(
-                    game.description,
+                    streamer.description,
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -182,8 +182,8 @@ class GameDetail extends StatelessWidget {
                     color: Colors.grey[800],
                   ),
                   GameItemResult(
-                    imageUrl: game.imageUrl,
-                    name: game.title,
+                    imageUrl: streamer.imageUrl,
+                    name: streamer.name,
                     morePadding: false,
                   ),
                   const SizedBox(
@@ -195,12 +195,12 @@ class GameDetail extends StatelessWidget {
                     spacing: 12,
                     children: [
                       TagPill(tag: "eng"),
-                      TagPill(tag: "esport"),
-                      TagPill(tag: "csgo"),
-                      TagPill(tag: "esl"),
+                      TagPill(tag: "gaming"),
+                      TagPill(tag: "pro"),
+                      TagPill(tag: "streamer"),
                       TagPill(tag: "fps"),
-                      TagPill(tag: "shooters"),
-                      TagPill(tag: "tournaments"),
+                      TagPill(tag: "variety"),
+                      TagPill(tag: "entertaining"),
                     ],
                   ),
                 ],

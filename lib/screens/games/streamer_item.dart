@@ -3,11 +3,11 @@ import 'package:streamingapp/utils/data.dart';
 import 'package:streamingapp/shared/rounded_label.dart';
 import 'package:streamingapp/shared/broadcast_item.dart';
 
-class GameItem extends StatelessWidget {
-  final Game game;
+class StreamerItem extends StatelessWidget {
+  final Streamer streamer;
   final Function onPress;
 
-  const GameItem({super.key, required this.game, required this.onPress});
+  const StreamerItem({super.key, required this.streamer, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class GameItem extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    game.title,
+                    streamer.name,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 32,
@@ -45,14 +45,14 @@ class GameItem extends StatelessWidget {
           ),
           BroadcastItem(
             live: true,
-            title: game.subTitle,
-            users: game.users,
-            imageUrl: game.imageUrl,
+            title: streamer.username,
+            users: streamer.followers,
+            imageUrl: streamer.imageUrl,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32),
             child: Text(
-              game.description,
+              streamer.description,
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 16,
