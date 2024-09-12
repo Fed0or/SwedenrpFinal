@@ -212,7 +212,7 @@ class _ExploreAllState extends State<ExploreAll> {
                         widget.onPress();
                       },
                       child: Text(
-                        "Open all",
+                        "Se alla",
                         style: TextStyle(
                           color: Colors.grey[600],
                           fontSize: 18,
