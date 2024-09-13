@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:streamingapp/screens/search/channel_item_result.dart';
-import 'package:streamingapp/screens/search/game_item_result.dart';
-import 'package:streamingapp/screens/search/other_item_result.dart';
-import 'package:streamingapp/utils/constants.dart';
-import 'package:streamingapp/shared/rounded_button.dart';
-import 'package:streamingapp/shared/custom_filled_field.dart';
+import 'package:sweden_roleplay/screens/search/channel_item_result.dart';
+import 'package:sweden_roleplay/screens/search/game_item_result.dart';
+import 'package:sweden_roleplay/screens/search/other_item_result.dart';
+import 'package:sweden_roleplay/utils/constants.dart';
+import 'package:sweden_roleplay/shared/rounded_button.dart';
+import 'package:sweden_roleplay/shared/custom_filled_field.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});

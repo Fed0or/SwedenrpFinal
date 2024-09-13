@@ -1,4 +1,4 @@
-package com.example.streamingapp
+package com.example.sweden_roleplay
 
 import io.flutter.embedding.android.FlutterActivity
 

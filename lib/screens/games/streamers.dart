@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:streamingapp/utils/constants.dart';
-import 'package:streamingapp/utils/data.dart';
-import 'package:streamingapp/screens/games/streamers_all.dart';
-import 'package:streamingapp/screens/games/streamer_detail.dart';
+import 'package:sweden_roleplay/utils/constants.dart';
+import 'package:sweden_roleplay/utils/data.dart';
+import 'package:sweden_roleplay/screens/games/streamers_all.dart';
+import 'package:sweden_roleplay/screens/games/streamer_detail.dart';
 
 class Streamers extends StatefulWidget {
   const Streamers({super.key});

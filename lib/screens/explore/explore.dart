@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:streamingapp/utils/constants.dart';
-import 'package:streamingapp/screens/explore/explore_all.dart';
-import 'package:streamingapp/screens/explore/popular_channels.dart';
+import 'package:sweden_roleplay/utils/constants.dart';
+import 'package:sweden_roleplay/screens/explore/explore_all.dart';
+import 'package:sweden_roleplay/screens/explore/popular_channels.dart';
 
 class Explore extends StatefulWidget {
   const Explore({super.key});

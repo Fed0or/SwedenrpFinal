@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "streamingapp" "\0"
+            VALUE "FileDescription", "sweden_roleplay" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "streamingapp" "\0"
+            VALUE "InternalName", "sweden_roleplay" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "streamingapp.exe" "\0"
-            VALUE "ProductName", "streamingapp" "\0"
+            VALUE "OriginalFilename", "sweden_roleplay.exe" "\0"
+            VALUE "ProductName", "sweden_roleplay" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

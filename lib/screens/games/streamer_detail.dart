@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:streamingapp/screens/search/game_item_result.dart';
-import 'package:streamingapp/shared/rounded_label.dart';
-import 'package:streamingapp/utils/constants.dart';
-import 'package:streamingapp/shared/tag_pill.dart';
-import 'package:streamingapp/utils/data.dart';
+import 'package:sweden_roleplay/screens/search/game_item_result.dart';
+import 'package:sweden_roleplay/shared/rounded_label.dart';
+import 'package:sweden_roleplay/utils/constants.dart';
+import 'package:sweden_roleplay/shared/tag_pill.dart';
+import 'package:sweden_roleplay/utils/data.dart';
 
 class StreamerDetail extends StatelessWidget {
   final Streamer streamer;
@@ -162,7 +162,7 @@ class StreamerDetail extends StatelessWidget {
                       RoundedLabel(
                         small: true,
                         color: Colors.grey[200]!,
-                        text: "Subscribe",
+                        text: "Donate",
                       ),
                     ],
                   ),
@@ -194,13 +194,13 @@ class StreamerDetail extends StatelessWidget {
                     runSpacing: 12,
                     spacing: 12,
                     children: [
-                      TagPill(tag: "eng"),
-                      TagPill(tag: "gaming"),
-                      TagPill(tag: "pro"),
-                      TagPill(tag: "streamer"),
-                      TagPill(tag: "fps"),
-                      TagPill(tag: "variety"),
-                      TagPill(tag: "entertaining"),
+                      TagPill(tag: "SWE"),
+                      TagPill(tag: "Gaming"),
+                      TagPill(tag: "Pro"),
+                      TagPill(tag: "Streamer"),
+                      TagPill(tag: "Roleplay"),
+                      TagPill(tag: "Typ?"),
+                      TagPill(tag: "?"),
                     ],
                   ),
                 ],

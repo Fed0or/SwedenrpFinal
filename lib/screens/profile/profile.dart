@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:streamingapp/utils/constants.dart';
-import 'package:streamingapp/shared/broadcast_item.dart';
-import 'package:streamingapp/shared/rounded_label.dart';
+import 'package:sweden_roleplay/utils/constants.dart';
+import 'package:sweden_roleplay/shared/broadcast_item.dart';
+import 'package:sweden_roleplay/shared/rounded_label.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -56,7 +56,7 @@ class _ProfileState extends State<Profile> {
                         RoundedLabel(
                           small: true,
                           color: Colors.grey[200]!,
-                          text: "Subscribe",
+                          text: "Donate",
                         ),
                       ],
                     ),

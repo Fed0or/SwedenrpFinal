@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:streamingapp/utils/constants.dart';
-import 'package:streamingapp/utils/data.dart';
-import 'package:streamingapp/screens/games/streamer_item.dart';
+import 'package:sweden_roleplay/utils/constants.dart';
+import 'package:sweden_roleplay/utils/data.dart';
+import 'package:sweden_roleplay/screens/games/streamer_item.dart';
 
 class StreamersAll extends StatelessWidget {
   final Function onPress;
@@ -47,7 +47,7 @@ class StreamersAll extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
-                            "All Streamers",
+                            "Alla Streamers",
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

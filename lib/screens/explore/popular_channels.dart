@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:streamingapp/shared/custom_filled_field.dart';
-import 'package:streamingapp/shared/popular_channel_item.dart';
-import 'package:streamingapp/utils/data.dart';
-import 'package:streamingapp/screens/games/streamer_detail.dart';
+import 'package:sweden_roleplay/shared/custom_filled_field.dart';
+import 'package:sweden_roleplay/shared/popular_channel_item.dart';
+import 'package:sweden_roleplay/utils/data.dart';
+import 'package:sweden_roleplay/screens/games/streamer_detail.dart';
 
 class PopularChannels extends StatelessWidget {
   final Function onPress;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:streamingapp/shared/rounded_label.dart';
+import 'package:sweden_roleplay/shared/rounded_label.dart';
 
 class ChannelItemResult extends StatelessWidget {
   final bool live;

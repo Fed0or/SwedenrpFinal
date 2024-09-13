@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:streamingapp/screens/explore/explore.dart';
-import 'package:streamingapp/screens/games/streamers.dart';
-import 'package:streamingapp/screens/profile/profile.dart';
-import 'package:streamingapp/screens/search/search.dart';
-import 'package:streamingapp/utils/constants.dart';
+import 'package:sweden_roleplay/screens/explore/explore.dart';
+import 'package:sweden_roleplay/screens/games/streamers.dart';
+import 'package:sweden_roleplay/screens/profile/profile.dart';
+import 'package:sweden_roleplay/screens/search/search.dart';
+import 'package:sweden_roleplay/utils/constants.dart';
 
 class Master extends StatefulWidget {
   const Master({super.key});
@@ -47,7 +47,7 @@ class _MasterState extends State<Master> {
           },
         );
       },
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Hem',

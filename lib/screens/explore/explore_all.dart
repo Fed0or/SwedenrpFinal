@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:streamingapp/shared/popular_channel_item.dart';
-import 'package:streamingapp/shared/rounded_label.dart';
-import 'package:streamingapp/utils/data.dart';
-import 'package:streamingapp/screens/games/streamer_detail.dart';
+import 'package:sweden_roleplay/shared/popular_channel_item.dart';
+import 'package:sweden_roleplay/shared/rounded_label.dart';
+import 'package:sweden_roleplay/utils/data.dart';
+import 'package:sweden_roleplay/screens/games/streamer_detail.dart';
 
 class ExploreAll extends StatefulWidget {
   final Function onPress;
@@ -144,8 +144,8 @@ class _ExploreAllState extends State<ExploreAll> {
                     ),
                   ),
                   // Discord updates section
-                  Padding(
-                    padding: const EdgeInsets.all(16),
+                  const Padding(
+                    padding: EdgeInsets.all(16),
                     child: Text(
                       "Server Updates",
                       style: TextStyle(
@@ -162,12 +162,12 @@ class _ExploreAllState extends State<ExploreAll> {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(child: CircularProgressIndicator());
                         } else if (snapshot.hasError) {
                           print("Error: ${snapshot.error}"); // Debug print
                           return Center(
                               child: Text('Error: ${snapshot.error}',
-                                  style: TextStyle(color: Colors.white)));
+                                  style: const TextStyle(color: Colors.white)));
                         } else if (snapshot.hasData &&
                             snapshot.data!.isNotEmpty) {
                           print(
@@ -176,20 +176,20 @@ class _ExploreAllState extends State<ExploreAll> {
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, index) {
                               return ListTile(
-                                leading: CircleAvatar(
+                                leading: const CircleAvatar(
                                   backgroundImage:
                                       AssetImage('assets/images/botfetch.jpg'),
                                 ),
                                 title: Text(
                                   snapshot.data![index],
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               );
                             },
                           );
                         } else {
                           print("No data available"); // Debug print
-                          return Center(
+                          return const Center(
                               child: Text('No updates available',
                                   style: TextStyle(color: Colors.white)));
                         }
@@ -256,14 +256,14 @@ class _ExploreAllState extends State<ExploreAll> {
                             ),
                           );
                         },
-                        child: PopularChannelItem(
+                        child: const PopularChannelItem(
                           imageUrl: "assets/images/user_1.jpg",
                           name: "1.Cuz",
                           variation: true,
                         ),
                       ),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
@@ -279,14 +279,14 @@ class _ExploreAllState extends State<ExploreAll> {
                             ),
                           );
                         },
-                        child: PopularChannelItem(
+                        child: const PopularChannelItem(
                           imageUrl: "assets/images/user_2.jpg",
                           name: "GhostAlby",
                           variation: true,
                         ),
                       ),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
@@ -302,7 +302,7 @@ class _ExploreAllState extends State<ExploreAll> {
                             ),
                           );
                         },
-                        child: PopularChannelItem(
+                        child: const PopularChannelItem(
                           imageUrl: "assets/images/user_3.jpg",
                           name: "Huncho",
                           variation: true,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:streamingapp/utils/constants.dart';
-import 'package:streamingapp/shared/rounded_button.dart';
-import 'package:streamingapp/shared/custom_field.dart';
-import 'package:streamingapp/screens/master.dart';
+import 'package:sweden_roleplay/utils/constants.dart';
+import 'package:sweden_roleplay/shared/rounded_button.dart';
+import 'package:sweden_roleplay/shared/custom_field.dart';
+import 'package:sweden_roleplay/screens/master.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});

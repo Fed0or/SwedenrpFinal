@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:streamingapp/utils/constants.dart';
-import 'package:streamingapp/shared/rounded_button.dart';
-import 'package:streamingapp/screens/authentication/login.dart';
-import 'package:streamingapp/screens/authentication/signup.dart';
+import 'package:sweden_roleplay/utils/constants.dart';
+import 'package:sweden_roleplay/shared/rounded_button.dart';
+import 'package:sweden_roleplay/screens/authentication/login.dart';
+import 'package:sweden_roleplay/screens/authentication/signup.dart';
 
 import '../../shared/social_login_button.dart';
 
@@ -37,7 +37,7 @@ class Welcome extends StatelessWidget {
                       const SizedBox(
                         height: 25,
                       ),
-                      Center(
+                      const Center(
                         child: Text(
                           "SWEDEN ROLEPLAY",
                           style: TextStyle(

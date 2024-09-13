@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:streamingapp/utils/data.dart';
-import 'package:streamingapp/shared/rounded_label.dart';
-import 'package:streamingapp/shared/broadcast_item.dart';
+import 'package:sweden_roleplay/utils/data.dart';
+import 'package:sweden_roleplay/shared/rounded_label.dart';
+import 'package:sweden_roleplay/shared/broadcast_item.dart';
 
 class StreamerItem extends StatelessWidget {
   final Streamer streamer;
