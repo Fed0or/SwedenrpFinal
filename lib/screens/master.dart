@@ -30,7 +30,7 @@ class _MasterState extends State<Master> {
   Widget getBody() {
     return IndexedStack(
       index: page,
-      children: const [Explore(), Search(), Streamers(), Profile()],
+      children: const [Explore(), Streamers(), Search(), Profile()],
     );
   }
 
@@ -47,18 +47,18 @@ class _MasterState extends State<Master> {
           },
         );
       },
-      items: const [
+      items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'Explore',
+          label: 'Hem',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Search',
+          icon: Icon(Icons.live_tv),
+          label: 'Live',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Ionicons.trophy),
-          label: 'Games',
+          icon: Icon(Icons.attach_money),
+          label: 'Donation',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.supervised_user_circle),
