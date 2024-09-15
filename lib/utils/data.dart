@@ -30,9 +30,9 @@ List<Streamer> getStreamers() {
       "186.255"
     ),
     Streamer(
-      "Huncho",
-      "Huncho",
-      "FIFA pro player. Road to world championship starts here!",
+      "JDevise",
+      "JDevise",
+      "Kick streamer showcasing amazing content!",
       "assets/images/user_3.jpg",
       "34521",
       "68.255"

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:sweden_roleplay/screens/explore/explore.dart';
 import 'package:sweden_roleplay/screens/games/streamers.dart';
 import 'package:sweden_roleplay/screens/profile/profile.dart';

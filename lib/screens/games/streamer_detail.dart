@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:sweden_roleplay/screens/search/game_item_result.dart';
 import 'package:sweden_roleplay/shared/rounded_label.dart';
 import 'package:sweden_roleplay/utils/constants.dart';
@@ -9,10 +10,14 @@ class StreamerDetail extends StatelessWidget {
   final Streamer streamer;
   final Function onPress;
 
-  const StreamerDetail({super.key, required this.streamer, required this.onPress});
+  const StreamerDetail(
+      {Key? key, required this.streamer, required this.onPress})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool isGhostAlby = streamer.name == "GhostAlby";
+
     return Scaffold(
       backgroundColor: kSecondaryColor,
       body: Column(
@@ -20,16 +25,21 @@ class StreamerDetail extends StatelessWidget {
           Container(
             height: 300,
             margin: const EdgeInsets.only(bottom: 16),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(streamer.imageUrl),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: SafeArea(
-              child: Stack(
-                children: [
-                  Padding(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                if (isGhostAlby)
+                  WebView(
+                    initialUrl: 'https://kick.com/ghostalby15',
+                    javascriptMode: JavascriptMode.unrestricted,
+                  )
+                else
+                  Image.asset(
+                    streamer.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                SafeArea(
+                  child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,7 +57,8 @@ class StreamerDetail extends StatelessWidget {
                           children: [
                             Container(
                               height: 36,
-                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
                               decoration: BoxDecoration(
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(5),
@@ -79,36 +90,19 @@ class StreamerDetail extends StatelessWidget {
                             const SizedBox(
                               width: 16,
                             ),
-                            const RoundedLabel(
-                              small: true,
-                              color: Colors.red,
-                              text: "Live",
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            const Icon(
-                              Icons.dashboard,
-                              color: Colors.white,
-                            ),
+                            if (isGhostAlby)
+                              const RoundedLabel(
+                                small: true,
+                                color: Colors.red,
+                                text: "Live",
+                              ),
                           ],
                         ),
                       ],
                     ),
                   ),
-                  const Align(
-                    alignment: Alignment.bottomRight,
-                    child: Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Icon(
-                        Icons.fullscreen,
-                        color: Colors.white,
-                        size: 32,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Expanded(
@@ -162,7 +156,7 @@ class StreamerDetail extends StatelessWidget {
                       RoundedLabel(
                         small: true,
                         color: Colors.grey[200]!,
-                        text: "Donate",
+                        text: "Subscribe",
                       ),
                     ],
                   ),
@@ -194,13 +188,13 @@ class StreamerDetail extends StatelessWidget {
                     runSpacing: 12,
                     spacing: 12,
                     children: [
-                      TagPill(tag: "SWE"),
-                      TagPill(tag: "Gaming"),
-                      TagPill(tag: "Pro"),
-                      TagPill(tag: "Streamer"),
-                      TagPill(tag: "Roleplay"),
-                      TagPill(tag: "Typ?"),
-                      TagPill(tag: "?"),
+                      TagPill(tag: "eng"),
+                      TagPill(tag: "gaming"),
+                      TagPill(tag: "pro"),
+                      TagPill(tag: "streamer"),
+                      TagPill(tag: "fps"),
+                      TagPill(tag: "variety"),
+                      TagPill(tag: "entertaining"),
                     ],
                   ),
                 ],

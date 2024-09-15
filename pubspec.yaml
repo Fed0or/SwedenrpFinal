@@ -14,6 +14,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^6.2.1
   ionicons: ^0.2.2
+  webview_flutter: ^3.0.0
 
   # Downgraded http_parser to 4.0.2 to resolve conflicts
   http_parser: ^4.0.2
