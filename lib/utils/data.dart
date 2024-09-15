@@ -1,13 +1,10 @@
-// lib/utils/data.dart
-
 class Streamer {
   String name;
   String visningar;
   String info;
   String imageUrl;
-  bool hasIcon;
 
-  Streamer(this.name, this.visningar, this.info, this.imageUrl, {this.hasIcon = false});
+  Streamer(this.name, this.visningar, this.info, this.imageUrl);
 }
 
 List<Streamer> getStreamers() {
@@ -23,7 +20,6 @@ List<Streamer> getStreamers() {
       "1400",
       "PODCAST GHOST TALKS",
       "assets/images/user_2.jpg",
-      hasIcon: true,
     ),
     Streamer(
       "Huncho",

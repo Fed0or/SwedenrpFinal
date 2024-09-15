@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:webview_windows/webview_windows.dart';
 import 'package:sweden_roleplay/utils/constants.dart';
@@ -7,9 +8,7 @@ class StreamerDetail extends StatefulWidget {
   final Streamer streamer;
   final Function onPress;
 
-  const StreamerDetail(
-      {Key? key, required this.streamer, required this.onPress})
-      : super(key: key);
+  const StreamerDetail({Key? key, required this.streamer, required this.onPress}) : super(key: key);
 
   @override
   _StreamerDetailState createState() => _StreamerDetailState();
@@ -18,11 +17,18 @@ class StreamerDetail extends StatefulWidget {
 class _StreamerDetailState extends State<StreamerDetail> {
   final _controller = WebviewController();
   bool _isWebViewReady = false;
+  bool _isGlowing = false;
+  late Timer _timer;
 
   @override
   void initState() {
     super.initState();
     initPlatformState();
+    _timer = Timer.periodic(Duration(milliseconds: 500), (timer) {
+      setState(() {
+        _isGlowing = !_isGlowing;
+      });
+    });
   }
 
   Future<void> initPlatformState() async {
@@ -34,6 +40,13 @@ class _StreamerDetailState extends State<StreamerDetail> {
         _isWebViewReady = true;
       });
     }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -55,22 +68,57 @@ class _StreamerDetailState extends State<StreamerDetail> {
           if (isGhostAlby && _isWebViewReady)
             Expanded(child: Webview(_controller))
           else
-            Image.asset(
-              widget.streamer.imageUrl,
-              fit: BoxFit.cover,
+            Container(
               height: 300,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(widget.streamer.imageUrl),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.streamer.name,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        widget.streamer.name,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    if (isGhostAlby)
+                      AnimatedContainer(
+                        duration: Duration(milliseconds: 500),
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: _isGlowing ? Colors.red.withOpacity(0.8) : Colors.red.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: _isGlowing ? Colors.red.withOpacity(0.5) : Colors.transparent,
+                              blurRadius: 10,
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          'LIVE',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
                 SizedBox(height: 8),
                 Text(
@@ -88,11 +136,5 @@ class _StreamerDetailState extends State<StreamerDetail> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }
