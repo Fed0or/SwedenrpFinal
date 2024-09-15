@@ -61,7 +61,7 @@ class _MasterState extends State<Master> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.supervised_user_circle),
-          label: 'Profile',
+          label: 'Profil',
         ),
       ],
       type: BottomNavigationBarType.fixed,
