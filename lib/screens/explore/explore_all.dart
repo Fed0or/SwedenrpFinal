@@ -18,13 +18,11 @@ class _ExploreAllState extends State<ExploreAll> {
   int currentPage = 0;
   int totalPages = 3;
   late Future<List<String>> discordUpdates;
-  late List<Streamer> streamers;
 
   @override
   void initState() {
     super.initState();
     discordUpdates = fetchDiscordUpdates();
-    streamers = getStreamers();
   }
 
   Future<List<String>> fetchDiscordUpdates() async {
@@ -67,6 +65,26 @@ class _ExploreAllState extends State<ExploreAll> {
       decoration: BoxDecoration(
         color: isActive ? Colors.white : Colors.grey[600],
         shape: BoxShape.circle,
+      ),
+    );
+  }
+
+  void navigateToStreamerDetail(String streamerName) {
+    List<Streamer> streamers = getStreamers();
+    Streamer? selectedStreamer = streamers.firstWhere(
+      (streamer) => streamer.name == streamerName,
+      orElse: () => Streamer("Not Found", "0", "Streamer not found", "assets/images/default.jpg"),
+    );
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => StreamerDetail(
+          streamer: selectedStreamer,
+          onPress: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
     );
   }
@@ -144,8 +162,8 @@ class _ExploreAllState extends State<ExploreAll> {
                     ),
                   ),
                   // Discord updates section
-                  const Padding(
-                    padding: EdgeInsets.all(16),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
                     child: Text(
                       "Server Updates",
                       style: TextStyle(
@@ -162,12 +180,12 @@ class _ExploreAllState extends State<ExploreAll> {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator());
+                          return Center(child: CircularProgressIndicator());
                         } else if (snapshot.hasError) {
                           print("Error: ${snapshot.error}"); // Debug print
                           return Center(
                               child: Text('Error: ${snapshot.error}',
-                                  style: const TextStyle(color: Colors.white)));
+                                  style: TextStyle(color: Colors.white)));
                         } else if (snapshot.hasData &&
                             snapshot.data!.isNotEmpty) {
                           print(
@@ -176,20 +194,20 @@ class _ExploreAllState extends State<ExploreAll> {
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, index) {
                               return ListTile(
-                                leading: const CircleAvatar(
+                                leading: CircleAvatar(
                                   backgroundImage:
                                       AssetImage('assets/images/botfetch.jpg'),
                                 ),
                                 title: Text(
                                   snapshot.data![index],
-                                  style: const TextStyle(color: Colors.white),
+                                  style: TextStyle(color: Colors.white),
                                 ),
                               );
                             },
                           );
                         } else {
                           print("No data available"); // Debug print
-                          return const Center(
+                          return Center(
                               child: Text('No updates available',
                                   style: TextStyle(color: Colors.white)));
                         }
@@ -243,66 +261,30 @@ class _ExploreAllState extends State<ExploreAll> {
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => StreamerDetail(
-                                streamer: streamers.firstWhere((s) => s.name == "1.cuz"),
-                                onPress: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                        child: const PopularChannelItem(
+                        onTap: () => navigateToStreamerDetail("1.cuz"),
+                        child: PopularChannelItem(
                           imageUrl: "assets/images/user_1.jpg",
                           name: "1.Cuz",
                           variation: true,
                         ),
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16),
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => StreamerDetail(
-                                streamer: streamers.firstWhere((s) => s.name == "GhostAlby"),
-                                onPress: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                        child: const PopularChannelItem(
+                        onTap: () => navigateToStreamerDetail("GhostAlby 👻"),
+                        child: PopularChannelItem(
                           imageUrl: "assets/images/user_2.jpg",
                           name: "GhostAlby",
                           variation: true,
                         ),
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16),
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => StreamerDetail(
-                                streamer: streamers.firstWhere((s) => s.name == "Huncho"),
-                                onPress: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                        child: const PopularChannelItem(
+                        onTap: () => navigateToStreamerDetail("Huncho"),
+                        child: PopularChannelItem(
                           imageUrl: "assets/images/user_3.jpg",
                           name: "Huncho",
                           variation: true,

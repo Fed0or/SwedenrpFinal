@@ -2,40 +2,34 @@
 
 class Streamer {
   String name;
-  String username;
-  String description;
+  String visningar;
+  String info;
   String imageUrl;
-  String followers;
-  String viewers;
+  bool hasIcon;
 
-  Streamer(this.name, this.username, this.description, this.imageUrl, this.followers, this.viewers);
+  Streamer(this.name, this.visningar, this.info, this.imageUrl, {this.hasIcon = false});
 }
 
 List<Streamer> getStreamers() {
   return <Streamer>[
     Streamer(
       "1.cuz",
-      "1.cuz",
+      "101.646",
       "Pro Fortnite player streaming daily. Come join the fun!",
       "assets/images/user_1.jpg",
-      "16890",
-      "101.646"
     ),
     Streamer(
-      "GhostAlby",
-      "GhostAlby",
-      "Variety streamer playing the latest and greatest games!",
+      "GhostAlby 👻",
+      "1400",
+      "PODCAST GHOST TALKS",
       "assets/images/user_2.jpg",
-      "95433",
-      "186.255"
+      hasIcon: true,
     ),
     Streamer(
-      "JDevise",
-      "JDevise",
+      "Huncho",
+      "68.255",
       "Kick streamer showcasing amazing content!",
       "assets/images/user_3.jpg",
-      "34521",
-      "68.255"
     ),
   ];
 }

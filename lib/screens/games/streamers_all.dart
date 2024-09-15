@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:sweden_roleplay/utils/constants.dart';
 import 'package:sweden_roleplay/utils/data.dart';
-import 'package:sweden_roleplay/screens/games/streamer_item.dart';
+import 'package:sweden_roleplay/screens/games/streamer_detail.dart';
 
 class StreamersAll extends StatelessWidget {
   final Function onPress;
 
-  const StreamersAll({super.key, required this.onPress});
+  const StreamersAll({Key? key, required this.onPress}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<Streamer> streamers = getStreamers();
+
     return Scaffold(
       backgroundColor: kSecondaryColor,
       body: SafeArea(
@@ -20,48 +22,20 @@ class StreamersAll extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  Image.asset(
+                    "assets/images/minilogo.jpg",
                     height: 32,
-                    child: Image.asset(
-                      "assets/icons/joystick.png",
-                      color: Colors.white,
-                    ),
                   ),
                   const SizedBox(
                     width: 16,
                   ),
-                  Expanded(
-                    child: Container(
-                      height: 48,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 12,
-                        horizontal: 16,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[800],
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Alla Streamers",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Container(
-                            height: 8,
-                            width: 8,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.grey[500],
-                            ),
-                          ),
-                        ],
+                  const Expanded(
+                    child: Text(
+                      "Live Streams",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -69,18 +43,78 @@ class StreamersAll extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: SingleChildScrollView(
+              child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: getStreamers()
-                      .map((item) => StreamerItem(
-                            streamer: item,
-                            onPress: () {
-                              onPress(item);
-                            },
-                          ))
-                      .toList(),
-                ),
+                itemCount: streamers.length,
+                itemBuilder: (context, index) {
+                  return StreamerListItem(
+                    streamer: streamers[index],
+                    onPress: () {
+                      onPress(streamers[index]);
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class StreamerListItem extends StatelessWidget {
+  final Streamer streamer;
+  final VoidCallback onPress;
+
+  const StreamerListItem({Key? key, required this.streamer, required this.onPress})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPress,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CircleAvatar(
+              radius: 30,
+              backgroundImage: AssetImage(streamer.imageUrl),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          streamer.name,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                     Text(
+                      "${streamer.visningar} visningar",
+                       style: const TextStyle(color: Colors.grey, fontSize: 14),
+                     ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    streamer.info,
+                    style: const TextStyle(color: Colors.grey, fontSize: 14),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
             ),
           ],
