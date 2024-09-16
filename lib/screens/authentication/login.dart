@@ -15,15 +15,6 @@ class Login extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        // leading: GestureDetector(
-        //   onTap: () {
-        //     Navigator.pop(context);
-        //   },
-        //   child: Icon(
-        //     Icons.arrow_back,
-        //     color: Colors.white,
-        //   ),
-        // ),
       ),
       body: SafeArea(
         child: Padding(
@@ -65,9 +56,9 @@ class Login extends StatelessWidget {
                 text: "Logga in",
                 color: kPrimaryColor,
                 onPress: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const Master()),
+                    MaterialPageRoute(builder: (context) => const MainScreen()),
                   );
                 },
               ),

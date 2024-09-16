@@ -105,7 +105,7 @@ class PopularChannels extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) => StreamerDetail(
-                            streamer: streamers.firstWhere((s) => s.name == "GhostAlby"),
+                            streamer: streamers.firstWhere((s) => s.name == "GhostAlby 👻"),
                             onPress: () {
                               Navigator.pop(context);
                             },

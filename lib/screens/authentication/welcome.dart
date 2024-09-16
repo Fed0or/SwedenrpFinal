@@ -21,25 +21,25 @@ class Welcome extends StatelessWidget {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Center(
                         child: SizedBox(
-                          height: 280,
+                          height: 350,
                           child: Image.asset(
                             "assets/icons/logo.png",
                           ),
                         ),
                       ),
                       const SizedBox(
-                        height: 25,
+                        height: 0,
                       ),
                       const Center(
                         child: Text(
-                          "SWEDEN ROLEPLAY",
+                          "",
                           style: TextStyle(
                             color: Color(0xFFCB6CE6), // Custom color
                             fontSize: 30,

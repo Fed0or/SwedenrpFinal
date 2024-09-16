@@ -1,70 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:sweden_roleplay/screens/explore/explore.dart';
 import 'package:sweden_roleplay/screens/games/streamers.dart';
+import 'package:sweden_roleplay/screens/donation/donation_page.dart';
 import 'package:sweden_roleplay/screens/profile/profile.dart';
-import 'package:sweden_roleplay/screens/search/search.dart';
 import 'package:sweden_roleplay/utils/constants.dart';
 
-class Master extends StatefulWidget {
-  const Master({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
-  State<Master> createState() => _MasterState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MasterState extends State<Master> {
-  int page = 0;
+class _MainScreenState extends State<MainScreen> {
+  int _selectedIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    Explore(),
+    Streamers(),
+    DonationPage(),
+    Profile(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 250),
-        child: getBody(),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: getBottomNavigationBar(),
-    );
-  }
-
-  Widget getBody() {
-    return IndexedStack(
-      index: page,
-      children: const [Explore(), Streamers(), Search(), Profile()],
-    );
-  }
-
-  Widget getBottomNavigationBar() {
-    return BottomNavigationBar(
-      backgroundColor: kBottomNavigationBar,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.grey[600],
-      currentIndex: page,
-      onTap: (index) {
-        setState(
-          () {
-            page = index;
-          },
-        );
-      },
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Hem',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.live_tv),
-          label: 'Live',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.attach_money),
-          label: 'Donation',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.supervised_user_circle),
-          label: 'Profil',
-        ),
-      ],
-      type: BottomNavigationBarType.fixed,
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Hem',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.live_tv),
+            label: 'Live',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.attach_money),
+            label: 'Donation',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profil',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: kPrimaryColor,
+        unselectedItemColor: Colors.grey,
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
