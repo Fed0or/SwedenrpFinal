@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_windows/webview_windows.dart';
-import 'package:sweden_roleplay/screens/search/game_item_result.dart';
 import 'package:sweden_roleplay/shared/rounded_label.dart';
 import 'package:sweden_roleplay/utils/constants.dart';
-import 'package:sweden_roleplay/shared/tag_pill.dart';
 import 'package:sweden_roleplay/utils/data.dart';
 
 class StreamerDetail extends StatefulWidget {

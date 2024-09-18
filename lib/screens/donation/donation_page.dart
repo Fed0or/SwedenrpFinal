@@ -20,7 +20,7 @@ const List<DonationItem> donationItems = [
 ];
 
 class DonationPage extends StatelessWidget {
-  const DonationPage({Key? key}) : super(key: key);
+  const DonationPage({super.key});
 
   @override
   Widget build(BuildContext context) {

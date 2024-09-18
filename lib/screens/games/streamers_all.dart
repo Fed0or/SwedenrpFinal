@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sweden_roleplay/utils/constants.dart';
 import 'package:sweden_roleplay/utils/data.dart';
-import 'package:sweden_roleplay/screens/games/streamer_detail.dart';
 
 class StreamersAll extends StatelessWidget {
   final Function onPress;

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:sweden_roleplay/shared/popular_channel_item.dart';
 import 'package:sweden_roleplay/shared/rounded_label.dart';
 import 'package:sweden_roleplay/utils/data.dart';
-import 'package:sweden_roleplay/screens/games/streamer_detail.dart';
+import 'package:sweden_roleplay/screens/profile/profile.dart';
 
 class ExploreAll extends StatefulWidget {
   final Function onPress;
@@ -18,20 +18,22 @@ class _ExploreAllState extends State<ExploreAll> {
   int currentPage = 0;
   int totalPages = 3;
   late Future<List<String>> discordUpdates;
+  late List<Streamer> streamers;
 
   @override
   void initState() {
     super.initState();
     discordUpdates = fetchDiscordUpdates();
+    streamers = getStreamers();
   }
 
   Future<List<String>> fetchDiscordUpdates() async {
     try {
-      print("Fetching Discord updates..."); // Debug print
+      print("Fetching Discord updates...");
       final response = await http.get(Uri.parse(
           'https://swedenrpupdates-7ef4b9385555.herokuapp.com/api/updates'));
-      print("API Response status code: ${response.statusCode}"); // Debug print
-      print("API Response body: ${response.body}"); // Debug print
+      print("API Response status code: ${response.statusCode}");
+      print("API Response body: ${response.body}");
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = jsonDecode(response.body);
         return jsonResponse.map((item) {
@@ -69,22 +71,15 @@ class _ExploreAllState extends State<ExploreAll> {
     );
   }
 
-  void navigateToStreamerDetail(String streamerName) {
-    List<Streamer> streamers = getStreamers();
-    Streamer? selectedStreamer = streamers.firstWhere(
-      (streamer) => streamer.name == streamerName,
+  void navigateToProfile(String streamerName) {
+    Streamer? streamer = streamers.firstWhere(
+      (s) => s.name.toLowerCase() == streamerName.toLowerCase(),
       orElse: () => Streamer("Not Found", "0", "Streamer not found", "assets/images/default.jpg"),
     );
-
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => StreamerDetail(
-          streamer: selectedStreamer,
-          onPress: () {
-            Navigator.pop(context);
-          },
-        ),
+        builder: (context) => Profile(streamer: streamer),
       ),
     );
   }
@@ -161,9 +156,8 @@ class _ExploreAllState extends State<ExploreAll> {
                       children: buildPageIndicator(),
                     ),
                   ),
-                  // Discord updates section
-                  Padding(
-                    padding: const EdgeInsets.all(16),
+                  const Padding(
+                    padding: EdgeInsets.all(16),
                     child: Text(
                       "Server Updates",
                       style: TextStyle(
@@ -174,40 +168,37 @@ class _ExploreAllState extends State<ExploreAll> {
                     ),
                   ),
                   SizedBox(
-                    height: 200, // Adjust this height as needed
+                    height: 200,
                     child: FutureBuilder<List<String>>(
                       future: discordUpdates,
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(child: CircularProgressIndicator());
                         } else if (snapshot.hasError) {
-                          print("Error: ${snapshot.error}"); // Debug print
+                          print("Error: ${snapshot.error}");
                           return Center(
                               child: Text('Error: ${snapshot.error}',
-                                  style: TextStyle(color: Colors.white)));
-                        } else if (snapshot.hasData &&
-                            snapshot.data!.isNotEmpty) {
-                          print(
-                              "Number of updates: ${snapshot.data!.length}"); // Debug print
+                                  style: const TextStyle(color: Colors.white)));
+                        } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                          print("Number of updates: ${snapshot.data!.length}");
                           return ListView.builder(
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, index) {
                               return ListTile(
-                                leading: CircleAvatar(
+                                leading: const CircleAvatar(
                                   backgroundImage:
                                       AssetImage('assets/images/botfetch.jpg'),
                                 ),
                                 title: Text(
                                   snapshot.data![index],
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               );
                             },
                           );
                         } else {
-                          print("No data available"); // Debug print
-                          return Center(
+                          print("No data available");
+                          return const Center(
                               child: Text('No updates available',
                                   style: TextStyle(color: Colors.white)));
                         }
@@ -218,7 +209,6 @@ class _ExploreAllState extends State<ExploreAll> {
               ),
             ),
           ),
-          // Popular channels section moved to the bottom
           Column(
             children: [
               Padding(
@@ -261,30 +251,30 @@ class _ExploreAllState extends State<ExploreAll> {
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onTap: () => navigateToStreamerDetail("1.cuz"),
-                        child: PopularChannelItem(
+                        onTap: () => navigateToProfile("1.cuz"),
+                        child: const PopularChannelItem(
                           imageUrl: "assets/images/user_1.jpg",
                           name: "1.Cuz",
                           variation: true,
                         ),
                       ),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Expanded(
                       child: GestureDetector(
-                        onTap: () => navigateToStreamerDetail("GhostAlby 👻"),
-                        child: PopularChannelItem(
+                        onTap: () => navigateToProfile("GhostAlby 👻"),
+                        child: const PopularChannelItem(
                           imageUrl: "assets/images/user_2.jpg",
                           name: "GhostAlby",
                           variation: true,
                         ),
                       ),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Expanded(
                       child: GestureDetector(
-                        onTap: () => navigateToStreamerDetail("Huncho"),
-                        child: PopularChannelItem(
+                        onTap: () => navigateToProfile("Huncho"),
+                        child: const PopularChannelItem(
                           imageUrl: "assets/images/user_3.jpg",
                           name: "Huncho",
                           variation: true,
@@ -301,8 +291,7 @@ class _ExploreAllState extends State<ExploreAll> {
     );
   }
 
-  Widget buildPage(
-      String userImage, String gameImage, String title, String subTitle) {
+  Widget buildPage(String userImage, String gameImage, String title, String subTitle) {
     return Container(
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.all(16),

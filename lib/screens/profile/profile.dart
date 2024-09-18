@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:sweden_roleplay/utils/constants.dart';
 import 'package:sweden_roleplay/shared/broadcast_item.dart';
 import 'package:sweden_roleplay/shared/rounded_label.dart';
+import 'package:sweden_roleplay/utils/data.dart';
+import 'package:sweden_roleplay/screens/games/streamer_detail.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
+class Profile extends StatelessWidget {
+  final Streamer streamer;
 
-  @override
-  State<Profile> createState() => _ProfileState();
-}
+  const Profile({Key? key, required this.streamer}) : super(key: key);
 
-class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,9 +18,9 @@ class _ProfileState extends State<Profile> {
         children: [
           Container(
             height: 350,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/profile.jpg"),
+                image: AssetImage(streamer.imageUrl),
                 fit: BoxFit.cover,
               ),
             ),
@@ -49,9 +48,9 @@ class _ProfileState extends State<Profile> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Icon(
-                          Icons.dashboard,
-                          color: Colors.white,
+                        IconButton(
+                          icon: Icon(Icons.arrow_back, color: Colors.white),
+                          onPressed: () => Navigator.pop(context),
                         ),
                         RoundedLabel(
                           small: true,
@@ -61,27 +60,23 @@ class _ProfileState extends State<Profile> {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 12,
-                  ),
+                  const SizedBox(height: 12),
                   Center(
                     child: Container(
                       height: 80,
                       width: 80,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage("assets/images/avatar_8.jpg"),
+                          image: AssetImage(streamer.imageUrl),
                           fit: BoxFit.cover,
                         ),
                         shape: BoxShape.circle,
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  const Text(
-                    "Aquiles20",
+                  const SizedBox(height: 12),
+                  Text(
+                    streamer.name,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 32,
@@ -89,8 +84,8 @@ class _ProfileState extends State<Profile> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const Text(
-                    "468.523 Followers",
+                  Text(
+                    "${streamer.visningar} Followers",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -103,14 +98,27 @@ class _ProfileState extends State<Profile> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const RoundedLabel(
-                          small: false,
-                          color: Colors.red,
-                          text: "Live",
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => StreamerDetail(
+                                  streamer: streamer,
+                                  onPress: () => Navigator.pop(context),
+                                ),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                            ),
+                          ),
+                          child: Text("Live"),
                         ),
-                        const SizedBox(
-                          width: 12,
-                        ),
+                        const SizedBox(width: 12),
                         RoundedLabel(
                           small: false,
                           color: Colors.grey[200]!,
@@ -125,9 +133,7 @@ class _ProfileState extends State<Profile> {
                     users: "690",
                     imageUrl: "assets/images/broadcast_1.jpg",
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -135,9 +141,7 @@ class _ProfileState extends State<Profile> {
                         Icons.replay,
                         color: Colors.grey[600],
                       ),
-                      const SizedBox(
-                        width: 8,
-                      ),
+                      const SizedBox(width: 8),
                       Text(
                         "Previous broadcasts",
                         style: TextStyle(
