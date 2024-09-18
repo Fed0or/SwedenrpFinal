@@ -8,7 +8,7 @@ class StreamerDetail extends StatefulWidget {
   final Streamer streamer;
   final Function onPress;
 
-  const StreamerDetail({Key? key, required this.streamer, required this.onPress}) : super(key: key);
+  const StreamerDetail({super.key, required this.streamer, required this.onPress});
 
   @override
   _StreamerDetailState createState() => _StreamerDetailState();

@@ -5,7 +5,7 @@ import 'package:sweden_roleplay/utils/data.dart';
 class StreamersAll extends StatelessWidget {
   final Function onPress;
 
-  const StreamersAll({Key? key, required this.onPress}) : super(key: key);
+  const StreamersAll({super.key, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +66,7 @@ class StreamerListItem extends StatelessWidget {
   final Streamer streamer;
   final VoidCallback onPress;
 
-  const StreamerListItem({Key? key, required this.streamer, required this.onPress})
-      : super(key: key);
+  const StreamerListItem({super.key, required this.streamer, required this.onPress});
 
   @override
   Widget build(BuildContext context) {

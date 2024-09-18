@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:webview_windows/webview_windows.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:sweden_roleplay/utils/constants.dart';
 import 'package:sweden_roleplay/utils/data.dart';
 
@@ -19,7 +19,7 @@ class StreamerDetail extends StatefulWidget {
 }
 
 class _StreamerDetailState extends State<StreamerDetail> {
-  final _controller = WebviewController();
+  late WebViewController _controller;
   bool _isWebViewReady = false;
   bool _isGlowing = false;
   late Timer _timer;
@@ -27,7 +27,7 @@ class _StreamerDetailState extends State<StreamerDetail> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    _initWebView();
     _timer = Timer.periodic(Duration(milliseconds: 500), (timer) {
       setState(() {
         _isGlowing = !_isGlowing;
@@ -35,17 +35,25 @@ class _StreamerDetailState extends State<StreamerDetail> {
     });
   }
 
-  Future<void> initPlatformState() async {
-    try {
-      await _controller.initialize();
-      await _controller.loadUrl(_getUrl());
-      if (!mounted) return;
-      setState(() {
-        _isWebViewReady = true;
-      });
-    } on Exception catch (e) {
-      print('Error: ${e}');
-    }
+  void _initWebView() {
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(const Color(0x00000000))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {},
+          onPageStarted: (String url) {},
+          onPageFinished: (String url) {
+            setState(() {
+              _isWebViewReady = true;
+            });
+          },
+          onWebResourceError: (WebResourceError error) {
+            print('WebView error: ${error.description}');
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(_getUrl()));
   }
 
   String _getUrl() {
@@ -61,7 +69,6 @@ class _StreamerDetailState extends State<StreamerDetail> {
   @override
   void dispose() {
     _timer.cancel();
-    _controller.dispose();
     super.dispose();
   }
 
@@ -77,7 +84,7 @@ class _StreamerDetailState extends State<StreamerDetail> {
         children: [
           Expanded(
             child: _isWebViewReady
-                ? Webview(_controller)
+                ? WebViewWidget(controller: _controller)
                 : Center(child: CircularProgressIndicator()),
           ),
           Padding(

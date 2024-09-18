@@ -7,7 +7,7 @@ import 'package:sweden_roleplay/utils/constants.dart';
 import 'package:sweden_roleplay/utils/data.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();

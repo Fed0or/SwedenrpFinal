@@ -105,7 +105,7 @@ class Profile extends StatelessWidget {
                               MaterialPageRoute(
                                 builder: (context) => StreamerDetail(
                                   streamer: streamer,
-                                  onPress: () => Navigator.pop(context),
+                                  isSpotify: false,
                                 ),
                               ),
                             );
@@ -118,6 +118,29 @@ class Profile extends StatelessWidget {
                           ),
                           child: Text("Live"),
                         ),
+                        if (streamer.name.toLowerCase() == "1.cuz") ...[
+                          const SizedBox(width: 12),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => StreamerDetail(
+                                    streamer: streamer,
+                                    isSpotify: true,
+                                  ),
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                              ),
+                            ),
+                            child: Text("Spotify"),
+                          ),
+                        ],
                         const SizedBox(width: 12),
                         RoundedLabel(
                           small: false,

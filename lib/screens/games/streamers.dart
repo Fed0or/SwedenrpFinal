@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sweden_roleplay/utils/constants.dart';
 import 'package:sweden_roleplay/utils/data.dart';
-import 'package:sweden_roleplay/screens/games/streamer_detail.dart';
-import 'package:sweden_roleplay/screens/games/streamers_all.dart';
+import 'package:sweden_roleplay/screens/profile/profile.dart';
 
 class Streamers extends StatefulWidget {
   const Streamers({super.key});
@@ -12,42 +11,47 @@ class Streamers extends StatefulWidget {
 }
 
 class _StreamersState extends State<Streamers> {
-  Widget currentWidgetView = StreamersAll(
-    onPress: () {},
-  );
+  late List<Streamer> streamers;
 
   @override
   void initState() {
     super.initState();
-    switchTo("streamers_all", null);
-  }
-
-  switchTo(String widgetName, Streamer? streamer) {
-    setState(() {
-      switch (widgetName) {
-        case "streamers_all":
-          currentWidgetView = StreamersAll(onPress: (streamer) {
-            switchTo("streamer_detail", streamer);
-          });
-          break;
-        case "streamer_detail":
-          currentWidgetView = StreamerDetail(
-              streamer: streamer!,
-              onPress: () {
-                switchTo("streamers_all", null);
-              });
-          break;
-      }
-    });
+    streamers = getStreamers();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kSecondaryColor,
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 250),
-        child: currentWidgetView,
+      appBar: AppBar(
+        title: Text("Streamers"),
+        backgroundColor: kSecondaryColor,
+      ),
+      body: ListView.builder(
+        itemCount: streamers.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: CircleAvatar(
+              backgroundImage: AssetImage(streamers[index].imageUrl),
+            ),
+            title: Text(
+              streamers[index].name,
+              style: TextStyle(color: Colors.white),
+            ),
+            subtitle: Text(
+              "${streamers[index].visningar} visningar",
+              style: TextStyle(color: Colors.grey),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Profile(streamer: streamers[index]),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
