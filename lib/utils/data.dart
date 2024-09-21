@@ -12,13 +12,13 @@ List<Streamer> getStreamers() {
     Streamer(
       "1.cuz",
       "101.646",
-      "Pro Fortnite player streaming daily. Come join the fun!",
+      "Sverige NR1 Rap Artist!",
       "assets/images/user_1.jpg",
     ),
     Streamer(
       "GhostAlby 👻",
       "1400",
-      "PODCAST GHOST TALKS",
+      "Professionell Tiktokare/kick streamer",
       "assets/images/user_2.jpg",
     ),
     Streamer(

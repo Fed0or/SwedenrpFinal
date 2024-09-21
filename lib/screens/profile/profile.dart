@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sweden_roleplay/utils/constants.dart';
 import 'package:sweden_roleplay/shared/broadcast_item.dart';
-import 'package:sweden_roleplay/shared/rounded_label.dart';
 import 'package:sweden_roleplay/utils/data.dart';
 import 'package:sweden_roleplay/screens/games/streamer_detail.dart';
+import 'package:sweden_roleplay/screens/games/TikTokWebView.dart';
 
 class Profile extends StatelessWidget {
   final Streamer streamer;
 
-  const Profile({Key? key, required this.streamer}) : super(key: key);
+  const Profile({super.key, required this.streamer});
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +49,16 @@ class Profile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                          icon: Icon(Icons.arrow_back, color: Colors.white),
+                          icon: const Icon(Icons.arrow_back, color: Colors.white),
                           onPressed: () => Navigator.pop(context),
                         ),
-                        RoundedLabel(
-                          small: true,
-                          color: Colors.grey[200]!,
-                          text: "Donate",
+                        _buildButton(
+                          "Donate",
+                          Colors.white.withOpacity(0.5),
+                          Colors.black,
+                          () {
+                            // Implement donation functionality
+                          },
                         ),
                       ],
                     ),
@@ -77,7 +80,7 @@ class Profile extends StatelessWidget {
                   const SizedBox(height: 12),
                   Text(
                     streamer.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 32,
                       color: Colors.white,
@@ -85,8 +88,8 @@ class Profile extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    "${streamer.visningar} Followers",
-                    style: TextStyle(
+                    "${streamer.visningar} Följare",
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       color: Colors.white,
@@ -98,8 +101,11 @@ class Profile extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
+                        _buildButton(
+                          "Live",
+                          const Color(0xFFCB6CE6).withOpacity(0.5),
+                          Colors.white,
+                          () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -110,18 +116,14 @@ class Profile extends StatelessWidget {
                               ),
                             );
                           },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                            ),
-                          ),
-                          child: Text("Live"),
                         ),
-                        if (streamer.name.toLowerCase() == "1.cuz") ...[
-                          const SizedBox(width: 12),
-                          ElevatedButton(
-                            onPressed: () {
+                        const SizedBox(width: 12),
+                        if (streamer.name.toLowerCase() == "1.cuz")
+                          _buildButton(
+                            "Spotify",
+                            const Color(0xFFCB6CE6).withOpacity(0.5),
+                            Colors.white,
+                            () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -132,27 +134,52 @@ class Profile extends StatelessWidget {
                                 ),
                               );
                             },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                              ),
-                            ),
-                            child: Text("Spotify"),
                           ),
-                        ],
                         const SizedBox(width: 12),
-                        RoundedLabel(
-                          small: false,
-                          color: Colors.grey[200]!,
-                          text: "Previous broadcasts",
+                        _buildButton(
+                          "TikTok",
+                          const Color(0xFFCB6CE6).withOpacity(0.5),
+                          Colors.white,
+                          () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TikTokWebView(streamer: streamer),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "About Me",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          streamer.info,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                   const BroadcastItem(
                     live: true,
-                    title: "Verdansk is mine! Follow on discord and twitch too",
+                    title: "Använd KOD 1CUZ10%",
                     users: "690",
                     imageUrl: "assets/images/broadcast_1.jpg",
                   ),
@@ -178,8 +205,8 @@ class Profile extends StatelessWidget {
                   ),
                   const BroadcastItem(
                     live: false,
-                    title: "90 kills on solos WarZone",
-                    users: "389",
+                    title: "HELLCASE CSGO CASE OPENING",
+                    users: "",
                     imageUrl: "assets/images/broadcast_2.jpg",
                   ),
                   const BroadcastItem(
@@ -193,6 +220,23 @@ class Profile extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildButton(String text, Color backgroundColor, Color textColor, VoidCallback onPressed) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: backgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(color: textColor),
       ),
     );
   }

@@ -24,7 +24,7 @@ class _StreamersState extends State<Streamers> {
     return Scaffold(
       backgroundColor: kSecondaryColor,
       appBar: AppBar(
-        title: Text("Streamers"),
+        title: const Text("Streamers"),
         backgroundColor: kSecondaryColor,
       ),
       body: ListView.builder(
@@ -36,11 +36,11 @@ class _StreamersState extends State<Streamers> {
             ),
             title: Text(
               streamers[index].name,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
             subtitle: Text(
               "${streamers[index].visningar} visningar",
-              style: TextStyle(color: Colors.grey),
+              style: const TextStyle(color: Colors.grey),
             ),
             onTap: () {
               Navigator.push(

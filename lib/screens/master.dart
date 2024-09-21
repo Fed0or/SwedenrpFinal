@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sweden_roleplay/screens/explore/explore.dart';
 import 'package:sweden_roleplay/screens/games/streamers.dart';
 import 'package:sweden_roleplay/screens/donation/donation_page.dart';
-import 'package:sweden_roleplay/screens/profile/profile.dart';
+import 'package:sweden_roleplay/screens/events/event_page.dart'; // Import the new EventPage
 import 'package:sweden_roleplay/utils/constants.dart';
-import 'package:sweden_roleplay/utils/data.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -15,30 +15,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-  late List<Streamer> streamers;
-  late Streamer defaultStreamer;
 
-  @override
-  void initState() {
-    super.initState();
-    streamers = getStreamers();
-    defaultStreamer = streamers.first; // Use the first streamer as default
-  }
-
-  Widget _getSelectedWidget(int index) {
-    switch (index) {
-      case 0:
-        return const Explore();
-      case 1:
-        return const Streamers();
-      case 2:
-        return const DonationPage();
-      case 3:
-        return Profile(streamer: defaultStreamer);
-      default:
-        return const Explore();
-    }
-  }
+  static const List<Widget> _widgetOptions = <Widget>[
+    Explore(),
+    Streamers(),
+    DonationPage(),
+    EventPage(), // Replace Profile with EventPage
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -50,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: _getSelectedWidget(_selectedIndex),
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -67,8 +50,8 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Donation',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
+            icon: Icon(Icons.event), // Change icon to event
+            label: 'Event', // Change label to Event
           ),
         ],
         currentIndex: _selectedIndex,

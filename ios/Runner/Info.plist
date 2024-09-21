@@ -49,3 +49,12 @@
 	<true/>
 </dict>
 </plist>
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>sweden-roleplay</string>
+    </array>
+  </dict>
+</array>

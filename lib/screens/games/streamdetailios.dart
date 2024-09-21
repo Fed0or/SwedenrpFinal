@@ -9,10 +9,10 @@ class StreamerDetail extends StatefulWidget {
   final bool isSpotify;
 
   const StreamerDetail({
-    Key? key,
+    super.key,
     required this.streamer,
     required this.isSpotify,
-  }) : super(key: key);
+  });
 
   @override
   _StreamerDetailState createState() => _StreamerDetailState();
@@ -28,7 +28,7 @@ class _StreamerDetailState extends State<StreamerDetail> {
   void initState() {
     super.initState();
     _initWebView();
-    _timer = Timer.periodic(Duration(milliseconds: 500), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 500), (timer) {
       setState(() {
         _isGlowing = !_isGlowing;
       });
@@ -85,7 +85,7 @@ class _StreamerDetailState extends State<StreamerDetail> {
           Expanded(
             child: _isWebViewReady
                 ? WebViewWidget(controller: _controller)
-                : Center(child: CircularProgressIndicator()),
+                : const Center(child: CircularProgressIndicator()),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -98,7 +98,7 @@ class _StreamerDetailState extends State<StreamerDetail> {
                     Expanded(
                       child: Text(
                         widget.streamer.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -107,8 +107,8 @@ class _StreamerDetailState extends State<StreamerDetail> {
                     ),
                     if (!widget.isSpotify && widget.streamer.name == "GhostAlby 👻")
                       AnimatedContainer(
-                        duration: Duration(milliseconds: 500),
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        duration: const Duration(milliseconds: 500),
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
                           color: _isGlowing ? Colors.red.withOpacity(0.8) : Colors.red.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(20),
@@ -120,7 +120,7 @@ class _StreamerDetailState extends State<StreamerDetail> {
                             ),
                           ],
                         ),
-                        child: Text(
+                        child: const Text(
                           'LIVE',
                           style: TextStyle(
                             color: Colors.white,
@@ -130,15 +130,15 @@ class _StreamerDetailState extends State<StreamerDetail> {
                       ),
                   ],
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   "${widget.streamer.visningar} visningar",
-                  style: TextStyle(color: Colors.grey, fontSize: 18),
+                  style: const TextStyle(color: Colors.grey, fontSize: 18),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   widget.streamer.info,
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ],
             ),

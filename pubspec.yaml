@@ -15,10 +15,12 @@ dependencies:
   google_fonts: ^6.2.1
   ionicons: ^0.2.2
   webview_flutter: ^4.0.0
-  webview_windows: ^0.2.2
-
-  # Downgraded http_parser to 4.0.2 to resolve conflicts
-  http_parser: ^4.0.2
+  webview_windows: ^0.4.0
+  flutter_web_auth: ^0.5.0
+  shared_preferences: ^2.1.1
+  firebase_core: ^2.25.4
+  cloud_firestore: ^4.15.5
+  firebase_auth: ^4.17.5
 
 dev_dependencies:
   flutter_test:
@@ -31,3 +33,5 @@ flutter:
   assets:
      - assets/icons/
      - assets/images/
+     - assets/images/banner.gif
+     
